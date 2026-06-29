@@ -1,0 +1,28 @@
+# Capstone new code snippet — POST /api/ask endpoint eval
+def classify_query(question: str) -> str:
+    """Classify a natural language question as rag, text2sql, or unknown."""
+    q = question.lower()
+    rag_keywords = ("tell me about", "what is", "describe", "how does", "explain")
+    if any(keyword in q for keyword in rag_keywords):
+        return "rag"
+    text2sql_keywords = ("how many", "which", "list", "count", "total")
+    if any(keyword in q for keyword in text2sql_keywords):
+        return "text2sql"
+    return "unknown"
+
+
+@app.post("/api/ask")
+def ask(body: AskRequest):
+    """Answer natural language questions about school activities."""
+    if body.question is None:
+        raise HTTPException(status_code=400, detail="question field required")
+    route = classify_query(body.question)
+    if route == "rag":
+        return rag_search(body.question)
+    if route == "text2sql":
+        return run_text2sql(body.question)
+    return {
+        "answer": "I can only answer questions about activities.",
+        "source": "direct",
+        "confidence": 1.0,
+    }

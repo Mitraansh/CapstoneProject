@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask About Activities — Mergington High School</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 640px;
+        margin: 40px auto;
+        padding: 0 20px;
+        color: #333;
+      }
+      h1 { color: #1a5276; }
+      label { display: block; margin-bottom: 8px; font-weight: bold; }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        margin-top: 12px;
+        padding: 10px 24px;
+        font-size: 16px;
+        background: #1a5276;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover { background: #154360; }
+      #result {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #f9f9f9;
+        display: none;
+      }
+      #source-label { font-size: 13px; color: #666; margin-top: 8px; }
+      #confidence { font-size: 13px; color: #27ae60; margin-top: 4px; }
+      #error { color: #c0392b; margin-top: 16px; display: none; }
+      a { color: #1a5276; }
+    </style>
+  </head>
+  <body>
+    <h1>Mergington High School</h1>
+    <h2>AI Activities Assistant</h2>
+    <p><a href="/static/index.html">&larr; Back to activities</a></p>
+
+    <label for="question">Ask about our activities</label>
+    <input type="text" id="question" placeholder="e.g. Tell me about Chess Club" />
+    <button id="submit-btn">Submit</button>
+
+    <div id="error"></div>
+    <div id="result">
+      <p id="answer"></p>
+      <p id="source-label"></p>
+      <p id="confidence"></p>
+    </div>
+
+    <script>
+      const questionInput = document.getElementById("question");
+      const submitBtn = document.getElementById("submit-btn");
+      const resultDiv = document.getElementById("result");
+      const answerEl = document.getElementById("answer");
+      const sourceEl = document.getElementById("source-label");
+      const confidenceEl = document.getElementById("confidence");
+      const errorEl = document.getElementById("error");
+
+      const sourceLabels = {
+        rag: "Answered from knowledge base",
+        text2sql: "Answered from database",
+        direct: "Direct answer",
+      };
+
+      async function submitQuestion() {
+        const question = questionInput.value.trim();
+        resultDiv.style.display = "none";
+        errorEl.style.display = "none";
+
+        if (!question) {
+          errorEl.textContent = "Please enter a question.";
+          errorEl.style.display = "block";
+          return;
+        }
+
+        try {
+          const response = await fetch("/api/ask", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ question }),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            errorEl.textContent = data.detail || data.error || "Something went wrong.";
+            errorEl.style.display = "block";
+            return;
+          }
+
+          answerEl.textContent = data.answer;
+          sourceEl.textContent = sourceLabels[data.source] || data.source;
+          confidenceEl.textContent =
+            data.confidence > 0.5
+              ? "Confidence: " + Math.round(data.confidence * 100) + "%"
+              : "";
+          resultDiv.style.display = "block";
+        } catch (err) {
+          errorEl.textContent =
+            "Unable to reach the server. Please try again later.";
+          errorEl.style.display = "block";
+        }
+      }
+
+      submitBtn.addEventListener("click", submitQuestion);
+      questionInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") submitQuestion();
+      });
+    </script>
+  </body>
+</html>
