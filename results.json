@@ -1,0 +1,1245 @@
+{
+  "evalId": "eval-N6Z-2026-06-29T14:25:23",
+  "results": {
+    "version": 3,
+    "timestamp": "2026-06-29T14:25:23.647Z",
+    "prompts": [
+      {
+        "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+        "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+        "id": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "provider": "echo",
+        "metrics": {
+          "score": 10,
+          "testPassCount": 10,
+          "testFailCount": 0,
+          "testErrorCount": 0,
+          "assertPassCount": 10,
+          "assertFailCount": 0,
+          "totalLatencyMs": 37,
+          "tokenUsage": {
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "total": 0,
+            "numRequests": 10,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            },
+            "assertions": {
+              "total": 0,
+              "prompt": 0,
+              "completion": 0,
+              "cached": 0,
+              "numRequests": 0,
+              "completionDetails": {
+                "reasoning": 0,
+                "acceptedPrediction": 0,
+                "rejectedPrediction": 0,
+                "cacheReadInputTokens": 0,
+                "cacheCreationInputTokens": 0
+              }
+            }
+          },
+          "namedScores": {},
+          "namedScoresCount": {},
+          "namedScoreWeights": {},
+          "cost": 0
+        }
+      }
+    ],
+    "results": [
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "def ask"
+              }
+            }
+          ]
+        },
+        "id": "0a5889be-f728-49a2-b288-de4b6e1553a5",
+        "latencyMs": 4,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: ask endpoint has correct function name",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "def ask"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 0,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "/api/ask"
+              }
+            }
+          ]
+        },
+        "id": "2b63e76d-603b-4e75-965e-3bd93f62b651",
+        "latencyMs": 3,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: ask endpoint uses correct route",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "/api/ask"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 1,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "POST"
+              }
+            }
+          ]
+        },
+        "id": "0356a4f1-73ea-4ec2-b845-4f0f0b03015a",
+        "latencyMs": 3,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: endpoint accepts POST method",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "POST"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 2,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "classify_query"
+              }
+            }
+          ]
+        },
+        "id": "949e4d1f-253e-4710-a5b2-b909199b44f6",
+        "latencyMs": 3,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: classifier function present",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "classify_query"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 3,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "rag"
+              }
+            }
+          ]
+        },
+        "id": "94bbf795-d73f-4be2-a62c-5f191092f662",
+        "latencyMs": 7,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: RAG routing for qualitative queries",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "rag"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 4,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "text2sql"
+              }
+            }
+          ]
+        },
+        "id": "a06eda05-fd23-4142-a964-e2fe849ec6ee",
+        "latencyMs": 3,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: Text2SQL routing for quantitative queries",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "text2sql"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 5,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-contains",
+                "value": "def get_activities"
+              }
+            }
+          ]
+        },
+        "id": "ca1a0e1d-1dc0-46b8-969b-ee2f0656fdfa",
+        "latencyMs": 4,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: does NOT modify get_activities — UAT-locked",
+          "assert": [
+            {
+              "type": "not-contains",
+              "value": "def get_activities"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 6,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "not-contains",
+                "value": "def signup"
+              }
+            }
+          ]
+        },
+        "id": "dd37e79e-8240-4b26-b3b9-b90d103acfb0",
+        "latencyMs": 3,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: does NOT modify signup — UAT-locked",
+          "assert": [
+            {
+              "type": "not-contains",
+              "value": "def signup"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 7,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "\"source\""
+              }
+            }
+          ]
+        },
+        "id": "e3ef03ea-6b29-4ceb-a737-2e4432c374ba",
+        "latencyMs": 3,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: returns source field in response",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "\"source\""
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 8,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      },
+      {
+        "cost": 0,
+        "gradingResult": {
+          "pass": true,
+          "score": 1,
+          "reason": "All assertions passed",
+          "namedScores": {},
+          "tokensUsed": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 0
+          },
+          "componentResults": [
+            {
+              "pass": true,
+              "score": 1,
+              "reason": "Assertion passed",
+              "assertion": {
+                "type": "contains",
+                "value": "400"
+              }
+            }
+          ]
+        },
+        "id": "fdf5df46-c854-4c6e-a9b3-b9ff9e9fa9a1",
+        "latencyMs": 4,
+        "namedScores": {},
+        "prompt": {
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "label": "eval\\capstone_new_code.txt: # Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "config": {}
+        },
+        "promptId": "0635f914df47c0a85eee866a1083f5e91f01c05fc0e41683ebebf8ba6335b47a",
+        "promptIdx": 0,
+        "provider": {
+          "id": "echo",
+          "label": ""
+        },
+        "response": {
+          "output": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "raw": "# Capstone new code snippet — POST /api/ask endpoint eval\ndef classify_query(question: str) -> str:\n    \"\"\"Classify a natural language question as rag, text2sql, or unknown.\"\"\"\n    q = question.lower()\n    rag_keywords = (\"tell me about\", \"what is\", \"describe\", \"how does\", \"explain\")\n    if any(keyword in q for keyword in rag_keywords):\n        return \"rag\"\n    text2sql_keywords = (\"how many\", \"which\", \"list\", \"count\", \"total\")\n    if any(keyword in q for keyword in text2sql_keywords):\n        return \"text2sql\"\n    return \"unknown\"\n\n\n@app.post(\"/api/ask\")\ndef ask(body: AskRequest):\n    \"\"\"Answer natural language questions about school activities.\"\"\"\n    if body.question is None:\n        raise HTTPException(status_code=400, detail=\"question field required\")\n    route = classify_query(body.question)\n    if route == \"rag\":\n        return rag_search(body.question)\n    if route == \"text2sql\":\n        return run_text2sql(body.question)\n    return {\n        \"answer\": \"I can only answer questions about activities.\",\n        \"source\": \"direct\",\n        \"confidence\": 1.0,\n    }",
+          "cost": 0,
+          "cached": false,
+          "tokenUsage": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "numRequests": 1
+          },
+          "isRefusal": false,
+          "metadata": {}
+        },
+        "score": 1,
+        "success": true,
+        "testCase": {
+          "description": "Capstone: handles 400 for missing question field",
+          "assert": [
+            {
+              "type": "contains",
+              "value": "400"
+            }
+          ],
+          "vars": {},
+          "options": {},
+          "metadata": {}
+        },
+        "testIdx": 9,
+        "tokenUsage": {
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "total": 0,
+          "numRequests": 1,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          },
+          "assertions": {
+            "total": 0,
+            "prompt": 0,
+            "completion": 0,
+            "cached": 0,
+            "numRequests": 1,
+            "completionDetails": {
+              "reasoning": 0,
+              "acceptedPrediction": 0,
+              "rejectedPrediction": 0,
+              "cacheReadInputTokens": 0,
+              "cacheCreationInputTokens": 0
+            }
+          }
+        },
+        "vars": {},
+        "metadata": {
+          "_promptfooFileMetadata": {}
+        },
+        "failureReason": 0
+      }
+    ],
+    "stats": {
+      "successes": 10,
+      "failures": 0,
+      "errors": 0,
+      "tokenUsage": {
+        "prompt": 0,
+        "completion": 0,
+        "cached": 0,
+        "total": 0,
+        "numRequests": 10,
+        "completionDetails": {
+          "reasoning": 0,
+          "acceptedPrediction": 0,
+          "rejectedPrediction": 0,
+          "cacheReadInputTokens": 0,
+          "cacheCreationInputTokens": 0
+        },
+        "assertions": {
+          "total": 0,
+          "prompt": 0,
+          "completion": 0,
+          "cached": 0,
+          "numRequests": 0,
+          "completionDetails": {
+            "reasoning": 0,
+            "acceptedPrediction": 0,
+            "rejectedPrediction": 0,
+            "cacheReadInputTokens": 0,
+            "cacheCreationInputTokens": 0
+          }
+        }
+      },
+      "durationMs": 200,
+      "evaluationDurationMs": 200
+    }
+  },
+  "config": {
+    "prompts": [
+      "file://eval/capstone_new_code.txt"
+    ],
+    "providers": [
+      {
+        "id": "echo"
+      }
+    ],
+    "tests": [
+      {
+        "description": "Capstone: ask endpoint has correct function name",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "def ask"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: ask endpoint uses correct route",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "/api/ask"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: endpoint accepts POST method",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "POST"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: classifier function present",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "classify_query"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: RAG routing for qualitative queries",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "rag"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: Text2SQL routing for quantitative queries",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "text2sql"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: does NOT modify get_activities — UAT-locked",
+        "assert": [
+          {
+            "type": "not-contains",
+            "value": "def get_activities"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: does NOT modify signup — UAT-locked",
+        "assert": [
+          {
+            "type": "not-contains",
+            "value": "def signup"
+          }
+        ]
+      },
+      {
+        "description": "Capstone: returns source field in response",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "\"source\""
+          }
+        ]
+      },
+      {
+        "description": "Capstone: handles 400 for missing question field",
+        "assert": [
+          {
+            "type": "contains",
+            "value": "400"
+          }
+        ]
+      }
+    ],
+    "outputPath": [
+      "results.json"
+    ],
+    "extensions": []
+  },
+  "shareableUrl": null,
+  "metadata": {
+    "promptfooVersion": "0.121.17",
+    "nodeVersion": "v24.17.0",
+    "platform": "win32",
+    "arch": "x64",
+    "exportedAt": "2026-06-29T14:25:24.007Z",
+    "evaluationCreatedAt": "2026-06-29T14:25:23.647Z"
+  },
+  "runtimeOptions": {
+    "eventSource": "cli",
+    "showProgressBar": true,
+    "repeat": 1,
+    "maxConcurrency": 4,
+    "cache": true
+  }
+}
